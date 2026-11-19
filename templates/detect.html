@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}New detection · PlateIQ
+{% if result %}
+<section class="result-panel">
+  <div class="section-head"><div><div class="eyebrow accent">ANALYSIS COMPLETE / 03</div><h3>Recognition result</h3></div><span class="status-tag {{ 'valid' if result.valid else 'review' }}">{{ 'Format validated' if result.valid else 'Needs manual review' }}</span></div>
+  <div class="result-grid">
+    <div class="result-image"><img src="{{ result.image_url }}" alt="Annotated vehicle image"></div>
+    <div class="result-data">
+      <span class="eyebrow">DETECTED REGISTRATION</span>
+      <div class="result-plate">{{ result.display }}</div>
+      <div class="result-metric"><span>OCR confidence</span><b>{{ '%.1f'|format(result.confidence*100) }}%</b></div>
+      <div class="result-metric"><span>Format check</span><b>{{ 'Passed' if result.valid else 'Review' }}</b></div>
+      <div class="result-metric"><span>Processed at</span><b>{{ result.seen_at }}</b></div>
+      {% if result.crop_url %}<a class="text-link crop-link" href="{{ result.crop_url }}" target="_blank">Open cropped plate ↗</a>{% endif %}
+      <a class="button secondary full" href="{{ url_for('history') }}">View detection history ↗</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}
+{% block heading %}New detection
+{% if result %}
+<section class="result-panel">
+  <div class="section-head"><div><div class="eyebrow accent">ANALYSIS COMPLETE / 03</div><h3>Recognition result</h3></div><span class="status-tag {{ 'valid' if result.valid else 'review' }}">{{ 'Format validated' if result.valid else 'Needs manual review' }}</span></div>
+  <div class="result-grid">
+    <div class="result-image"><img src="{{ result.image_url }}" alt="Annotated vehicle image"></div>
+    <div class="result-data">
+      <span class="eyebrow">DETECTED REGISTRATION</span>
+      <div class="result-plate">{{ result.display }}</div>
+      <div class="result-metric"><span>OCR confidence</span><b>{{ '%.1f'|format(result.confidence*100) }}%</b></div>
+      <div class="result-metric"><span>Format check</span><b>{{ 'Passed' if result.valid else 'Review' }}</b></div>
+      <div class="result-metric"><span>Processed at</span><b>{{ result.seen_at }}</b></div>
+      {% if result.crop_url %}<a class="text-link crop-link" href="{{ result.crop_url }}" target="_blank">Open cropped plate ↗</a>{% endif %}
+      <a class="button secondary full" href="{{ url_for('history') }}">View detection history ↗</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}
+{% block content %}
+<div class="page-intro"><div class="eyebrow accent">IMAGE ANALYSIS / 02</div><h2>Turn pixels into<br><em>registration data.</em></h2><p>Upload a clear vehicle image. The local recognition engine will locate a plate and extract its text.</p></div>
+<div class="detect-layout">
+  <form class="upload-card" method="post" enctype="multipart/form-data">
+    <div class="card-kicker"><span class="step">01</span> SOURCE IMAGE</div>
+    <label class="dropzone" for="image-input"><div class="upload-symbol">↑</div><strong>Drop your image here</strong><span>or <u>browse files</u></span><small>JPG, PNG, WEBP or BMP · up to 12 MB</small><input id="image-input" type="file" name="image" accept=".jpg,.jpeg,.png,.webp,.bmp" required></label>
+    <div class="privacy-note"><span>◈</span> Images are processed locally by this application and stored in its uploads folder.</div>
+    <button class="button primary full" type="submit">Run recognition <span>↗</span></button>
+  </form>
+  <aside class="process-card"><div class="card-kicker"><span class="step">02</span> PIPELINE</div><div class="pipeline">
+    <div class="pipeline-item"><span class="pipeline-num">01</span><div><b>Plate detection</b><small>OpenCV contours identify plate-shaped regions.</small></div><span class="check">✓</span></div>
+    <div class="pipeline-item"><span class="pipeline-num">02</span><div><b>Image enhancement</b><small>Grayscale, upscaling and CLAHE contrast.</small></div><span class="check">✓</span></div>
+    <div class="pipeline-item"><span class="pipeline-num">03</span><div><b>Text recognition</b><small>EasyOCR reads alphanumeric characters.</small></div><span class="check">✓</span></div>
+    <div class="pipeline-item"><span class="pipeline-num">04</span><div><b>Format validation</b><small>Checks Indian registration plate structure.</small></div><span class="check">✓</span></div>
+  </div><div class="engine-note"><span class="pulse"></span><div><b>LOCAL ENGINE</b><small>No external API required</small></div></div></aside>
+</div>
+
+{% if result %}
+<section class="result-panel">
+  <div class="section-head"><div><div class="eyebrow accent">ANALYSIS COMPLETE / 03</div><h3>Recognition result</h3></div><span class="status-tag {{ 'valid' if result.valid else 'review' }}">{{ 'Format validated' if result.valid else 'Needs manual review' }}</span></div>
+  <div class="result-grid">
+    <div class="result-image"><img src="{{ result.image_url }}" alt="Annotated vehicle image"></div>
+    <div class="result-data">
+      <span class="eyebrow">DETECTED REGISTRATION</span>
+      <div class="result-plate">{{ result.display }}</div>
+      <div class="result-metric"><span>OCR confidence</span><b>{{ '%.1f'|format(result.confidence*100) }}%</b></div>
+      <div class="result-metric"><span>Format check</span><b>{{ 'Passed' if result.valid else 'Review' }}</b></div>
+      <div class="result-metric"><span>Processed at</span><b>{{ result.seen_at }}</b></div>
+      {% if result.crop_url %}<a class="text-link crop-link" href="{{ result.crop_url }}" target="_blank">Open cropped plate ↗</a>{% endif %}
+      <a class="button secondary full" href="{{ url_for('history') }}">View detection history ↗</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}

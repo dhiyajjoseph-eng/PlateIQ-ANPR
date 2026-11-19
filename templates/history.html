@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}History · PlateIQ{% endblock %}
+{% block heading %}Detection history{% endblock %}
+{% block content %}
+<div class="section-head history-head"><div><div class="eyebrow accent">ARCHIVE / 03</div><h3>All recorded detections</h3><p class="muted">Search saved plate reads by registration number.</p></div><a class="button primary" href="{{ url_for('detect') }}">＋ New detection</a></div>
+<form class="search-bar"><span>⌕</span><input name="q" value="{{ query }}" placeholder="Search registration number…"><button class="button secondary">Search</button></form>
+{% if detections %}
+<div class="table-wrap"><table><thead><tr><th>REGISTRATION</th><th>STATUS</th><th>CONFIDENCE</th><th>DATE & TIME</th><th>ACTION</th></tr></thead><tbody>
+{% for item in detections %}<tr><td><span class="plate-chip">{{ item.display }}</span></td><td><span class="status-tag {{ 'valid' if item.valid else 'review' }}">{{ 'Validated' if item.valid else 'Review needed' }}</span></td><td><div class="confidence"><span>{{ '%.0f'|format(item.confidence*100) }}%</span><i><b style="width:{{ item.confidence*100 }}%"></b></i></div></td><td class="muted">{{ item.seen_at }}</td><td><form method="post" action="{{ url_for('remove_detection', detection_id=item.id) }}" onsubmit="return confirm('Delete this record?')"><button class="icon-button" title="Delete">×</button></form></td></tr>{% endfor %}
+</tbody></table></div>
+{% else %}<div class="empty-state"><div class="empty-icon">◷</div><h3>No matching records</h3><p>Try another registration number or run a new detection.</p></div>{% endif %}
+{% endblock %}

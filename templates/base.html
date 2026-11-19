@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}PlateIQ · ANPR{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="{{ url_for('dashboard') }}"><span class="brand-mark">P</span><span>plate<span class="brand-light">iq</span><small>INTELLIGENCE SYSTEM</small></span></a>
+    <div class="nav-label">WORKSPACE</div>
+    <a class="nav-link {% if page=='dashboard' %}active{% endif %}" href="{{ url_for('dashboard') }}"><span>▦</span> Overview</a>
+    <a class="nav-link {% if page=='detect' %}active{% endif %}" href="{{ url_for('detect') }}"><span>⌗</span> New detection</a>
+    <a class="nav-link {% if page=='history' %}active{% endif %}" href="{{ url_for('history') }}"><span>◷</span> Detection history</a>
+    <div class="sidebar-bottom"><div class="status-dot"></div><span>Recognition engine</span><b>LOCAL</b><p>OpenCV · EasyOCR</p></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div><span class="eyebrow">VEHICLE INTELLIGENCE</span><h1>{% block heading %}Overview{% endblock %}</h1></div><div class="top-right"><span class="live-pill"><i></i> SYSTEM READY</span><div class="avatar">A</div></div></header>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}{% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+    <footer>PLATEIQ <span>·</span> Local ANPR workspace <span class="footer-right">Built with OpenCV + EasyOCR</span></footer>
+  </main>
+</div>
+</body></html>
