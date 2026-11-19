@@ -1,8 +1,6 @@
 Flask>=3.0,<4.0
-opencv-python>=4.9
-easyocr>=1.7
-numpy>=1.26
+gunicorn>=22.0
+opencv-python-headless>=4.9,<5.0
+easyocr>=1.7,<2.0
+numpy>=1.26,<2.0
 Pillow>=10.0
-# Optional, only if you have a trained plate detector weights file:
-# ultralytics>=8.0
-gunicorn
