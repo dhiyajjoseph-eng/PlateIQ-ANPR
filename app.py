@@ -20,7 +20,7 @@ RESULT_DIR.mkdir(exist_ok=True)
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "change-this-before-deployment")
-app.config["MAX_CONTENT_LENGTH"] = 12 * 1024 * 1024
+app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024
 init_db(DB_PATH)
 
 def allowed_file(filename):
@@ -63,8 +63,7 @@ def detect():
             app.logger.exception("Recognition failed")
             flash(f"Processing failed: {exc}", "error")
         finally:
-            # Keep the uploaded image in uploads for troubleshooting and reproducibility.
-            pass
+            input_path.unlink(missing_ok=True)
 
     return render_template("detect.html", result=result, page="detect")
 

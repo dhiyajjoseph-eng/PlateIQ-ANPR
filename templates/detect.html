@@ -8,7 +8,7 @@
     <div class="result-data">
       <span class="eyebrow">DETECTED REGISTRATION</span>
       <div class="result-plate">{{ result.display }}</div>
-      <div class="result-metric"><span>OCR confidence</span><b>{{ '%.1f'|format(result.confidence*100) }}%</b></div>
+      <div class="result-metric"><span>OCR confidence (not provided by cloud API)</span><b>N/A</b></div>
       <div class="result-metric"><span>Format check</span><b>{{ 'Passed' if result.valid else 'Review' }}</b></div>
       <div class="result-metric"><span>Processed at</span><b>{{ result.seen_at }}</b></div>
       {% if result.crop_url %}<a class="text-link crop-link" href="{{ result.crop_url }}" target="_blank">Open cropped plate ↗</a>{% endif %}
@@ -28,7 +28,7 @@
     <div class="result-data">
       <span class="eyebrow">DETECTED REGISTRATION</span>
       <div class="result-plate">{{ result.display }}</div>
-      <div class="result-metric"><span>OCR confidence</span><b>{{ '%.1f'|format(result.confidence*100) }}%</b></div>
+      <div class="result-metric"><span>OCR confidence (not provided by cloud API)</span><b>N/A</b></div>
       <div class="result-metric"><span>Format check</span><b>{{ 'Passed' if result.valid else 'Review' }}</b></div>
       <div class="result-metric"><span>Processed at</span><b>{{ result.seen_at }}</b></div>
       {% if result.crop_url %}<a class="text-link crop-link" href="{{ result.crop_url }}" target="_blank">Open cropped plate ↗</a>{% endif %}
@@ -64,7 +64,7 @@
     <div class="result-data">
       <span class="eyebrow">DETECTED REGISTRATION</span>
       <div class="result-plate">{{ result.display }}</div>
-      <div class="result-metric"><span>OCR confidence</span><b>{{ '%.1f'|format(result.confidence*100) }}%</b></div>
+      <div class="result-metric"><span>OCR confidence (not provided by cloud API)</span><b>N/A</b></div>
       <div class="result-metric"><span>Format check</span><b>{{ 'Passed' if result.valid else 'Review' }}</b></div>
       <div class="result-metric"><span>Processed at</span><b>{{ result.seen_at }}</b></div>
       {% if result.crop_url %}<a class="text-link crop-link" href="{{ result.crop_url }}" target="_blank">Open cropped plate ↗</a>{% endif %}
