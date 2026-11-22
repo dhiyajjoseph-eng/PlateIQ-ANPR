@@ -95,9 +95,6 @@ PlateIQ-ANPR/
    $env:SECRET_KEY="YOUR_LONG_RANDOM_SECRET"
    python app.py
    ```
-
-4. Visit http://127.0.0.1:5000 and upload a clear vehicle image.
-
 Get an API key at https://ocr.space/ocrapi/freekey. Uploaded image crops are sent to that third-party service.
 
 ## Render deployment
