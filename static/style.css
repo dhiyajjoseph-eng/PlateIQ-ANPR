@@ -5,3 +5,12 @@
 
 .result-panel{margin-top:28px;border:1px solid var(--line);border-radius:11px;background:#111923;padding:22px}.result-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:20px}.result-image{background:#080d12;border-radius:8px;overflow:hidden;display:flex;align-items:center;min-height:220px}.result-image img{width:100%;height:auto;display:block}.result-data{padding:8px}.result-plate{font:600 25px var(--display);letter-spacing:1px;color:var(--lime);margin:10px 0 22px}.result-metric{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:10px 0;color:var(--muted);font-size:10px}.result-metric b{color:var(--text)}.crop-link{display:inline-block;margin:15px 0}.result-data .button{margin-top:8px}
 @media(max-width:700px){.result-grid{grid-template-columns:1fr}}
+
+/* PlateIQ Cloud OCR: prevent result images from overlapping layout */
+.page-intro,.detect-layout,.result-panel{position:relative;min-width:0}
+.result-grid{min-width:0}
+.result-grid > *{min-width:0}
+.result-image{min-width:0;max-width:100%;overflow:hidden}
+.result-image img{display:block;width:100%;height:auto;max-width:100%;max-height:520px;object-fit:contain}
+.result-data{min-width:0;overflow-wrap:anywhere}
+@media(max-width:700px){.result-grid{grid-template-columns:minmax(0,1fr)}.result-panel{padding:15px}}
